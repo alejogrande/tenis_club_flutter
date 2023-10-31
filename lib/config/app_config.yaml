@@ -1,0 +1,6 @@
+baseUrl: ""
+apiKey: ""
+hash: ""
+connectTimeOut: 120000
+receiveTimeOut: 120000
+ts: 1
