@@ -35,9 +35,18 @@ class ReservationSelectedDateState extends ReservationState {
   DateTime date;
   Court? court;
   List<Hour> listHours;
+  
+  
+  ReservationSelectedDateState(this.court,this.date,this.listHours);
+}
+
+class ReservationSelectedHourState extends ReservationState {
+  DateTime date;
+  Court? court;
+  List<Hour> listHours;
   String? icon;
-  int? grade;
-  ReservationSelectedDateState(this.court,this.date,this.listHours,this.icon,this.grade);
+  String? grade;
+  ReservationSelectedHourState(this.court,this.date,this.listHours,this.icon,this.grade);
 }
 
 

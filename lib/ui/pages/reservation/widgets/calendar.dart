@@ -23,13 +23,14 @@ class _DialogSelectionState extends State<DialogSelectionCompactFecha> {
         width: 300,
         height: 300,
         child: CalendarDatePicker(
-          firstDate: DateTime.now().add(const Duration(days: 16)),
-          lastDate: DateTime(DateTime.now().year + 1, 1),
-          initialDate: DateTime.now().add(const Duration(days: 16)),
+          firstDate: DateTime.now().add(const Duration(days: 1)),
+          lastDate: DateTime.now().add(const Duration(days: 4)),
+          initialDate: DateTime.now().add(const Duration(days: 1)),
           onDateChanged: (DateTime d) {
             
             reservationBloc.add(ReservationSelectedDateEvent(widget.court,d));
              Navigator.pop(context);
+             
           },
         ),
       ),

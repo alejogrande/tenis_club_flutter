@@ -104,7 +104,7 @@ class LocalDataSourceImplement implements LocalDatabase {
       booking.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
-var a = viewBooking();
+    var a = viewBooking();
     print(viewBooking().toString());
   }
 
@@ -130,11 +130,21 @@ var a = viewBooking();
       return Booking(
         id: maps[i]['id'],
         date: DateTime.parse(maps[i]['date']),
-        grade: maps[i]['grade'],
+        grade: maps[i]['grade'].toString(),
         idCourt: maps[i]['idCourt'],
         idHour: maps[i]['idHour'],
         icon: maps[i]['icon'],
       );
     });
+  }
+
+  @override
+  Future<String> viewHour(String id) async {
+    final db = await database;
+
+    final List<Map<String, dynamic>> maps =
+        await db.query('hour', where: 'id = ?', whereArgs: [int.parse(id)]);
+
+    return maps.first['details'];
   }
 }

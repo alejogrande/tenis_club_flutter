@@ -38,6 +38,10 @@ class BookingRepository {
     final response = await database.viewHours();
     return response;
   }
+     Future<String> getHourbyId(String id) async {
+    final response = await database.viewHour(id);
+    return response;
+  }
 
   Future setBooking(Booking booking) async {
     final response = await database.insertBooking(booking);

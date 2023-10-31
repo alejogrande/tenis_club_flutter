@@ -11,6 +11,7 @@ import 'package:tenis_club/ui/pages/court_selection/bloc/court_selection_bloc.da
 import 'package:tenis_club/ui/pages/reservation/bloc/reservation_bloc.dart';
 import 'package:tenis_club/ui/widgets/custom_elevated_button.dart';
 import 'package:tenis_club/utils/Utils.dart';
+import 'package:tenis_club/utils/constans.dart';
 import 'package:tenis_club/utils/resources/colors.dart';
 
 part 'widgets/calendar.dart';
@@ -50,17 +51,19 @@ class _ReservationScreenState extends State<ReservationScreen> {
     BookingRepository repository =
         BookingRepository(LocalDataSourceImplement());
     final _theme = Theme.of(context);
+    
 
     return Scaffold(
         appBar: AppBar(
           title: const Text("Crear reserva"),
         ),
-        body: BlocBuilder<ReservationBloc, ReservationState>(
+        body: BlocConsumer<ReservationBloc, ReservationState>(
           bloc: reservationBloc, // provide the local bloc instance
 
           builder: (context, state) {
             return (state is ReservationInitialState ||
-                    state is ReservationSelectedDateState)
+                    state is ReservationSelectedDateState||
+                    state is ReservationSelectedHourState)
                 ? SingleChildScrollView(
                     child: Padding(
                       padding: const EdgeInsets.all(20.0),
@@ -79,7 +82,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
                                   textAlign: TextAlign.center,
                                   controller: dateController,
                                   onTap: () async {
-                                    await showDialog(
+                                      await showDialog(
                                         context: context,
                                         builder: ((context) =>
                                             DialogSelectionCompactFecha(
@@ -135,14 +138,17 @@ class _ReservationScreenState extends State<ReservationScreen> {
                                     : null,
                                 value: idHour,
                                 onChanged: (value) {
-                                  idHour = value;
+                                   idHour = value;
+                                  reservationBloc.add(ReservationSelectedHourEvent(state.court,state.date,idHour!));
+                                  
+                                 
                                 },
                               ),
                             ),
                           ]
                               // , onChanged: ((value) {})),
                               ),
-                          state is ReservationSelectedDateState
+                          state is ReservationSelectedHourState
                               ? Row(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
@@ -158,12 +164,15 @@ class _ReservationScreenState extends State<ReservationScreen> {
                               style: _theme.textTheme.displaySmall),
                           TextFormField(
                             controller: nombreController,
+                            onChanged: (_){setState(() {
+                              
+                            });},
                           ),
                           const SizedBox(
                             height: 50,
                           ),
-                          state is ReservationSelectedDateState
-                              ? CustomElevatedButton(
+                          state is ReservationSelectedHourState && nombreController.text != ""
+                              ? CustomElevatedButton (
                                   onTap: (() {
                                     if (nombreController.text != "") {
                                       reservationBloc.add(
@@ -171,7 +180,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
                                               date: state.date,
                                               idCourt: state.court?.id,
                                               idHour: int.parse(idHour!),
-                                              grade: state.grade,
+                                              grade: state.grade!,
                                               icon: state.icon)));
                                     } else {}
                                   }),
@@ -186,7 +195,12 @@ class _ReservationScreenState extends State<ReservationScreen> {
                     ),
                   )
                 : Container();
-          },
+          }, listener: (BuildContext context, ReservationState state) { 
+            if(state is ReservationReadyState ){
+               Navigator.pushReplacementNamed(
+                                              context, Routes.home);
+            }
+           },
         ));
   }
 }

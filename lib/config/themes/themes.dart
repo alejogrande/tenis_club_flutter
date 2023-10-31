@@ -9,7 +9,7 @@ ThemeData theme(BuildContext context) {
     secondaryHeaderColor: Colors.red,
     cardColor: AppColors.card,
     disabledColor: AppColors.disabledButton,
-    hintColor: AppColors.fontSubtitle,
+    hintColor: const Color.fromARGB(255, 13, 60, 177),
     indicatorColor: AppColors.primary,
     primaryColor: AppColors.primary,
     primaryIconTheme: const IconThemeData(
@@ -19,7 +19,7 @@ ThemeData theme(BuildContext context) {
     textSelectionTheme: const TextSelectionThemeData(
       cursorColor: AppColors.primary,
     ),
-    scaffoldBackgroundColor: AppColors.background,
+    scaffoldBackgroundColor: const Color.fromARGB(255, 228, 228, 228),
     appBarTheme: const AppBarTheme(
       elevation: 0,
       centerTitle: true,

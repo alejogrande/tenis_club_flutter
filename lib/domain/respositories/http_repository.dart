@@ -16,7 +16,7 @@ class HttpService {
 
   static Future<Weather?> getWeather(String date) async {
     String url =
-      "https://api.weatherapi.com/v1/future.json?key=582b30cb62db4b78a4c113847231601&q=41.40338; 2.17403&dt=$date";
+      "https://api.openweathermap.org/data/2.5/forecast?lat=19.4326&lon=-99.1332&lang=es&appid=29635d83be060c60d9af145045e4151e&units=metric";
     final response = await http.get(Uri.parse(url));
      final resp= weatherFromJson(response.body);
     return resp ;

@@ -21,9 +21,8 @@ class Hour {
 }
 
 List<Hour> schedule = [
-  const Hour(id: 1001, details: "7:00 - 8:45"),
-  const Hour(id: 1002, details: "9:00 - 10:45"),
-  const Hour(id: 1003, details: "11:00 - 12:45"),
-  const Hour(id: 1004, details: "13:00 - 14:45"),
-  const Hour(id: 1005, details: "15:00 - 16:45"),
+  const Hour(id: 1001, details: "06:00-08:45"),
+  const Hour(id: 1002, details: "09:00-11:45"),
+  const Hour(id: 1003, details: "12:00-14:45"),
+  const Hour(id: 1004, details: "15:00-17:45"),
 ];

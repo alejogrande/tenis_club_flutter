@@ -4,7 +4,7 @@ class Booking {
   final int? idCourt;
   final DateTime? date;
   final String? icon;
-  final int? grade;
+  final String? grade;
 
   const Booking(
       { this.id,

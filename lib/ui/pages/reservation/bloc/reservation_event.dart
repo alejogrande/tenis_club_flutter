@@ -4,9 +4,7 @@ part of 'reservation_bloc.dart';
 abstract class ReservationEvent {}
 
 class ReservationLoadingEvent extends ReservationEvent {
-//  final String aa;
 
-//   CourtSelectionLoadingEvent(this.aa);
 
 }
 
@@ -21,6 +19,13 @@ class ReservationSelectedDateEvent extends ReservationEvent {
   Court? court;
   DateTime date;
   ReservationSelectedDateEvent(this.court, this.date);
+}
+class ReservationSelectedHourEvent extends ReservationEvent {
+
+  Court? court;
+  DateTime date;
+  String idHour;
+  ReservationSelectedHourEvent(this.court, this.date,this.idHour);
 }
 
 class CreateReservationEvent extends ReservationEvent{
