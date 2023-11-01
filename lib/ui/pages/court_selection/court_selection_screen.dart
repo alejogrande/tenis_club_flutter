@@ -9,7 +9,7 @@ import 'package:tenis_club/ui/widgets/custom_elevated_button.dart';
 import 'package:tenis_club/utils/constans.dart';
 import 'package:tenis_club/utils/resources/colors.dart';
 
-part 'widgets/cardCourt.dart';
+part 'widgets/card_court.dart';
 
 class CourtSelectionScreen extends StatefulWidget {
   const CourtSelectionScreen({Key? key}) : super(key: key);
@@ -35,9 +35,9 @@ class _CourtSelectionScreenState extends State<CourtSelectionScreen> {
 
   @override
   Widget build(BuildContext context) {
-    BookingRepository repository =
-        BookingRepository(LocalDataSourceImplement());
-    var a;
+    // BookingRepository repository =
+    //     BookingRepository(LocalDataSourceImplement());
+    // var a;
     return Scaffold(
         appBar: AppBar(
           title: const Text("Selección de cancha"),

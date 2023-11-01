@@ -1,5 +1,6 @@
 import 'package:tenis_club/data/model/booking_model.dart';
 import 'package:tenis_club/data/model/court_model.dart';
+import 'package:tenis_club/data/model/home_booking_model.dart';
 import 'package:tenis_club/data/model/hour_model.dart';
 
 abstract class LocalDatabase {
@@ -9,6 +10,7 @@ abstract class LocalDatabase {
   Future<List<Booking>> viewBooking();
   Future<List<Booking>> viewAvailableDate(DateTime dateSelected, Court court);
   Future<dynamic> insertBooking(Booking booking);
-  Future<dynamic> deleteBooking(Booking booking);
+  Future<dynamic> deleteBooking(int id);
   Future<dynamic> updateBooking(Booking booking);
+  Future<List<HomeBooking>>viewListBooking();
 }

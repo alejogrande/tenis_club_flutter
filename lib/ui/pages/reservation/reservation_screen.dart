@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -51,7 +49,6 @@ class _ReservationScreenState extends State<ReservationScreen> {
     BookingRepository repository =
         BookingRepository(LocalDataSourceImplement());
     final _theme = Theme.of(context);
-    
 
     return Scaffold(
         appBar: AppBar(
@@ -62,7 +59,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
 
           builder: (context, state) {
             return (state is ReservationInitialState ||
-                    state is ReservationSelectedDateState||
+                    state is ReservationSelectedDateState ||
                     state is ReservationSelectedHourState)
                 ? SingleChildScrollView(
                     child: Padding(
@@ -82,17 +79,13 @@ class _ReservationScreenState extends State<ReservationScreen> {
                                   textAlign: TextAlign.center,
                                   controller: dateController,
                                   onTap: () async {
-                                      await showDialog(
+                                    await showDialog(
                                         context: context,
                                         builder: ((context) =>
                                             DialogSelectionCompactFecha(
                                                 state.court)));
-
-                                    setState(() {
-                                      dateController.text =
-                                          Utils.formatDateTime(state.date);
-                                    });
                                   },
+
                                   readOnly: true,
                                   decoration: const InputDecoration(
                                     iconColor: AppColors.primary,
@@ -125,23 +118,29 @@ class _ReservationScreenState extends State<ReservationScreen> {
                                         .map<DropdownMenuItem<String>>(
                                           (item) => DropdownMenuItem<String>(
                                             onTap: () {
-                                              setState(() {
-                                                //CREA UNA VARIABLE DE CLASE DEL ID
-                                                //  idHour = item.userId;
-                                              });
+                                              setState(() {});
                                             },
                                             value: item.id.toString(),
-                                            child: Text(item.details),
+                                            enabled: item.visible,
+                                            child: item.visible
+                                                ? Text(
+                                                    item.details,
+                                                  )
+                                                : Text(
+                                                    item.details,
+                                                    style: const TextStyle(
+                                                        color: Colors.grey),
+                                                  ),
                                           ),
                                         )
                                         .toList()
                                     : null,
                                 value: idHour,
                                 onChanged: (value) {
-                                   idHour = value;
-                                  reservationBloc.add(ReservationSelectedHourEvent(state.court,state.date,idHour!));
-                                  
-                                 
+                                  idHour = value;
+                                  reservationBloc.add(
+                                      ReservationSelectedHourEvent(
+                                          state.court, state.date, idHour!));
                                 },
                               ),
                             ),
@@ -164,15 +163,16 @@ class _ReservationScreenState extends State<ReservationScreen> {
                               style: _theme.textTheme.displaySmall),
                           TextFormField(
                             controller: nombreController,
-                            onChanged: (_){setState(() {
-                              
-                            });},
+                            onChanged: (_) {
+                              setState(() {});
+                            },
                           ),
                           const SizedBox(
                             height: 50,
                           ),
-                          state is ReservationSelectedHourState && nombreController.text != ""
-                              ? CustomElevatedButton (
+                          state is ReservationSelectedHourState &&
+                                  nombreController.text != ""
+                              ? CustomElevatedButton(
                                   onTap: (() {
                                     if (nombreController.text != "") {
                                       reservationBloc.add(
@@ -181,7 +181,8 @@ class _ReservationScreenState extends State<ReservationScreen> {
                                               idCourt: state.court?.id,
                                               idHour: int.parse(idHour!),
                                               grade: state.grade!,
-                                              icon: state.icon)));
+                                              icon: state.icon,
+                                              name: nombreController.text)));
                                     } else {}
                                   }),
                                   label: "Guardar",
@@ -195,12 +196,17 @@ class _ReservationScreenState extends State<ReservationScreen> {
                     ),
                   )
                 : Container();
-          }, listener: (BuildContext context, ReservationState state) { 
-            if(state is ReservationReadyState ){
-               Navigator.pushReplacementNamed(
-                                              context, Routes.home);
+          },
+          listener: (BuildContext context, ReservationState state) {
+            if (state is ReservationSelectedDateState) {
+              setState(() {
+                dateController.text = Utils.formatDateTime(state.date);
+              });
             }
-           },
+            if (state is ReservationReadyState) {
+              Navigator.pushReplacementNamed(context, Routes.home);
+            }
+          },
         ));
   }
 }
