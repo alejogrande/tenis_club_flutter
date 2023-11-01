@@ -4,9 +4,9 @@ import 'package:tenis_club/data/model/home_booking_model.dart';
 import 'package:tenis_club/ui/pages/home/bloc/home_bloc.dart';
 import 'package:tenis_club/ui/pages/home/widgets/alerta_de_eliminado.dart';
 import 'package:tenis_club/ui/pages/home/widgets/text_and_title_textfiel.dart';
-import 'package:tenis_club/ui/widgets/custom_elevated_button.dart';
+
 import 'package:tenis_club/utils/constans.dart';
-import 'package:tenis_club/data/model/booking_model.dart';
+
 import 'package:tenis_club/utils/resources/colors.dart';
 part 'widgets/card_booking.dart';
 
@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Reservas"),
+          title: const Text("Reservas"),
         ),
         floatingActionButton: FloatingActionButton(
             onPressed: () =>

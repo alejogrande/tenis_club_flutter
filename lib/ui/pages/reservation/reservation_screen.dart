@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tenis_club/data/datasources/local_data_sources_implements.dart';
+
 import 'package:tenis_club/data/model/booking_model.dart';
 import 'package:tenis_club/data/model/court_model.dart';
-import 'package:tenis_club/domain/respositories/booking_repository.dart';
+
 import 'package:tenis_club/ui/pages/court_selection/bloc/court_selection_bloc.dart';
 import 'package:tenis_club/ui/pages/reservation/bloc/reservation_bloc.dart';
 import 'package:tenis_club/ui/widgets/custom_elevated_button.dart';
-import 'package:tenis_club/utils/Utils.dart';
+import 'package:tenis_club/utils/utils.dart';
 import 'package:tenis_club/utils/constans.dart';
 import 'package:tenis_club/utils/resources/colors.dart';
 
@@ -46,9 +46,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    BookingRepository repository =
-        BookingRepository(LocalDataSourceImplement());
-    final _theme = Theme.of(context);
+    final theme = Theme.of(context);
 
     return Scaffold(
         appBar: AppBar(
@@ -72,7 +70,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
                             children: <Widget>[
                               Text(
                                 "Ingresar fecha:  ",
-                                style: _theme.textTheme.displaySmall,
+                                style: theme.textTheme.displaySmall,
                               ),
                               Flexible(
                                 child: TextFormField(
@@ -106,7 +104,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
                           ),
                           Row(children: [
                             Text("Hora de reserva: ",
-                                style: _theme.textTheme.displaySmall),
+                                style: theme.textTheme.displaySmall),
                             const SizedBox(
                               width: 25,
                             ),
@@ -160,7 +158,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
                             height: 50,
                           ),
                           Text("Nombre de la reserva:",
-                              style: _theme.textTheme.displaySmall),
+                              style: theme.textTheme.displaySmall),
                           TextFormField(
                             controller: nombreController,
                             onChanged: (_) {

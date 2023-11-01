@@ -22,7 +22,8 @@ class ReservationInitial extends ReservationState {
 
 }
 class ReservationInitialState extends ReservationState {
-    Court court;
+    @override
+  Court court;
     
   ReservationInitialState(this.court);
   
@@ -32,8 +33,11 @@ class ReservationLoadingState extends ReservationState {}
 class ReservationReadyState extends ReservationState {}
 
 class ReservationSelectedDateState extends ReservationState {
+  @override
   DateTime date;
+  @override
   Court? court;
+  @override
   List<Hour> listHours;
   
   
@@ -41,10 +45,15 @@ class ReservationSelectedDateState extends ReservationState {
 }
 
 class ReservationSelectedHourState extends ReservationState {
+  @override
   DateTime date;
+  @override
   Court? court;
+  @override
   List<Hour> listHours;
+  @override
   String? icon;
+  @override
   String? grade;
   ReservationSelectedHourState(this.court,this.date,this.listHours,this.icon,this.grade);
 }
