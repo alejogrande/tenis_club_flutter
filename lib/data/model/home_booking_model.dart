@@ -1,17 +1,20 @@
-class Booking {
+import 'package:tenis_club/data/model/court_model.dart';
+import 'package:tenis_club/data/model/hour_model.dart';
+
+class HomeBooking {
   final int? id;
-  final int? idHour;
-  final int? idCourt;
+  final Hour? hour;
+  final Court? court;
   final DateTime? date;
   final String? icon;
   final String? grade;
   final String? name;
 
-  const Booking(
+  const HomeBooking(
       { this.id,
       required this.date,
-      required this.idCourt,
-      required this.idHour,
+      required this.court,
+      required this.hour,
       required this.grade,
       required this.icon,
       required this.name});
@@ -20,16 +23,11 @@ class Booking {
     return {
       // 'id': id,
       'date': date.toString(),
-      'idCourt': idCourt,
-      'idHour': idHour,
+      'idCourt': court,
+      'idHour': hour,
       'grade': grade,
       'icon': icon,
       'name':name,
     };
-  }
-
-  @override
-  String toString() {
-    return 'hours{id: $id, date: $date, idCourt: $idCourt, idHour: $idHour, grade: $grade, icon: $icon}';
   }
 }

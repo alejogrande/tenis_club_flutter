@@ -1,17 +1,17 @@
 part of '../reservation_screen.dart';
 
 class DialogSelectionCompactFecha extends StatefulWidget {
-  Court? court;
-  DialogSelectionCompactFecha(
+  final Court? court;
+  const DialogSelectionCompactFecha(
     this.court,
     {
     Key? key,
   }) : super(key: key);
   @override
-  _DialogSelectionState createState() => _DialogSelectionState();
+  DialogSelectionState createState() => DialogSelectionState();
 }
 
-class _DialogSelectionState extends State<DialogSelectionCompactFecha> {
+class DialogSelectionState extends State<DialogSelectionCompactFecha> {
 
   late ReservationBloc reservationBloc;
   @override
@@ -29,7 +29,11 @@ class _DialogSelectionState extends State<DialogSelectionCompactFecha> {
           onDateChanged: (DateTime d) {
             
             reservationBloc.add(ReservationSelectedDateEvent(widget.court,d));
+            setState(() {
+              
+            });
              Navigator.pop(context);
+             
              
           },
         ),

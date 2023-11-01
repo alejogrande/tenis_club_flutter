@@ -4,6 +4,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:tenis_club/data/datasources/local_data_sources.dart';
 import 'package:tenis_club/data/model/booking_model.dart';
 import 'package:tenis_club/data/model/court_model.dart';
+import 'package:tenis_club/data/model/home_booking_model.dart';
 import 'package:tenis_club/data/model/hour_model.dart';
 import 'package:tenis_club/utils/constans.dart';
 
@@ -88,10 +89,15 @@ class LocalDataSourceImplement implements LocalDatabase {
   }
 
   @override
-  Future deleteBooking(Booking booking) {
-    // TODO: implement deleteBooking
-    throw UnimplementedError();
-  }
+Future<void> deleteBooking(int id) async {
+  final db = await database;
+
+  await db.delete(
+    'booking',
+    where: 'id = ?',
+    whereArgs: [id],
+  );
+}
 
   @override
   Future insertBooking(Booking booking) async {
@@ -134,6 +140,52 @@ class LocalDataSourceImplement implements LocalDatabase {
         idCourt: maps[i]['idCourt'],
         idHour: maps[i]['idHour'],
         icon: maps[i]['icon'],
+        name: maps[i]['name'],
+      );
+    });
+  }
+
+  Future<List<HomeBooking>> viewListBooking() async {
+    final db = await database;
+
+    final List<Map<String, dynamic>> maps = await db.query('booking');
+    final List<Map<String, dynamic>> courts = await db.query('court');
+    final List<Map<String, dynamic>> hours = await db.query('hour');
+
+    return List.generate(maps.length, (i) {
+      final int idCourt = maps[i]['idCourt'];
+      final int idHour = maps[i]['idHour'];
+
+      final Map<String, dynamic> courtMap =
+          courts.firstWhere((court) => court['id'] == idCourt);
+
+      final Court court = Court(
+        id: courtMap['id'],
+        name: courtMap['name'],
+        details: courtMap['details'],
+        size: courtMap['size'],
+        image: courtMap['image'],
+        
+      );
+
+      final Map<String, dynamic> hourMap =
+          hours.firstWhere((hour) => hour['id'] == idHour);
+
+      final Hour hour = Hour(
+        id: hourMap['id'],
+        details: hourMap['details'],
+      );
+
+      return HomeBooking(
+        id: maps[i]['id'],
+        date: DateTime.parse(maps[i]['date']),
+        grade: maps[i]['grade'].toString(),
+        // idCourt: maps[i]['idCourt'],
+        court: court,
+        hour: hour,
+        // idHour: maps[i]['idHour'],
+        icon: maps[i]['icon'],
+        name: maps[i]['name'],
       );
     });
   }
