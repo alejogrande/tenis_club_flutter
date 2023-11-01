@@ -2,8 +2,6 @@
 
 A new Flutter project.
 
-A new Flutter project with [Marvel Comics api](https://developer.marvel.com/).
-
 - This app is intended for tennis court administrators to handle reservation requests.
 - I used [flutter_bloc](https://pub.dev/packages/flutter_bloc) package for State Management.
 - I used clean architecture
