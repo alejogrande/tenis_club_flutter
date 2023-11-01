@@ -13,11 +13,6 @@ class BookingRepository {
     return response;
   }
 
-  Future<List<Booking>> getAvailableDate(
-      DateTime dateSelected, Court court) async {
-    final response = await database.viewAvailableDate(dateSelected, court);
-    return response;
-  }
 
   Future<List<Booking>> getBooking() async {
     final response = await database.viewBooking();
@@ -44,10 +39,7 @@ class BookingRepository {
     return response;
   }
 
-  Future updateBooking(Booking booking) async {
-    final response = await database.updateBooking(booking);
-    return response;
-  }
+
 
   Future getListHomeBooking() async {
     final response = await database.viewListBooking();

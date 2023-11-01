@@ -14,7 +14,8 @@ class CourtSelectionLoadingState extends CourtSelectionState {}
 
 // ignore: must_be_immutable
 class CourtSelectionSucefullState extends CourtSelectionState {
-    List<Court> listCourts;
+    @override
+      List<Court> listCourts;
   CourtSelectionSucefullState(this.listCourts);
 }
 
@@ -22,7 +23,9 @@ class CourtSelectionErrorState extends CourtSelectionState {}
 
 // ignore: must_be_immutable
 class CourtSelectionSelectedState extends CourtSelectionState {
+  @override
   Court court;
-    List<Court> listCourts;
+    @override
+      List<Court> listCourts;
   CourtSelectionSelectedState(this.listCourts,this.court);
 }

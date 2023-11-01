@@ -59,6 +59,7 @@ class LocalDataSourceImplement implements LocalDatabase {
     }
   }
 
+  @override
   Future<List<Hour>> viewHours() async {
     final db = await database;
 
@@ -72,6 +73,7 @@ class LocalDataSourceImplement implements LocalDatabase {
     });
   }
 
+  @override
   Future<List<Court>> viewCourts() async {
     final db = await database;
 
@@ -103,28 +105,16 @@ Future<void> deleteBooking(int id) async {
   Future insertBooking(Booking booking) async {
     final db = await database;
 
-    final List<Map<String, dynamic>> maps = await db.query('booking');
 
     await db.insert(
       'booking',
       booking.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
-    var a = viewBooking();
-    print(viewBooking().toString());
+
   }
 
-  @override
-  Future updateBooking(Booking booking) {
-    // TODO: implement updateBooking
-    throw UnimplementedError();
-  }
 
-  @override
-  Future<List<Booking>> viewAvailableDate(DateTime dateSelected, Court court) {
-    // TODO: implement viewAvailableDate
-    throw UnimplementedError();
-  }
 
   @override
   Future<List<Booking>> viewBooking() async {
@@ -145,6 +135,7 @@ Future<void> deleteBooking(int id) async {
     });
   }
 
+  @override
   Future<List<HomeBooking>> viewListBooking() async {
     final db = await database;
 
